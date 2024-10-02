@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['importlibraries_0',['importLibraries',['../namespacegltf__materialx__converter_1_1utilities.html#a6f9828d270d3c5107a82918662a0bcd7',1,'gltf_materialx_converter::utilities']]]
+  ['loadjsonfile_0',['loadJsonFile',['../namespacegltf__materialx__converter_1_1utilities.html#ac5ff190c310901acc9f56df448125645',1,'gltf_materialx_converter::utilities']]],
+  ['loadstandardlibraries_1',['loadStandardLibraries',['../namespacegltf__materialx__converter_1_1utilities.html#a02d949a1d609bc7f8de8dd77c18cee9c',1,'gltf_materialx_converter::utilities']]]
 ];

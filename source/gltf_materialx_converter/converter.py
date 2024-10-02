@@ -169,7 +169,10 @@ class glTFMaterialXConverter():
         self.supported_types = ['boolean', 'string', 'integer', 'matrix33', 'matrix44', 'vector2', 'vector3', 'vector4', 'float', 'color3', 'color4']
         self.array_types = ['matrix33', 'matrix44', 'vector2', 'vector3', 'vector4', 'color3', 'color4']
 
-    def set_debug(self, debug):
+        # MaterialX and 3rd party meta-data. Default is MaterialX based metadata
+        self.metadata = ['colorspace', 'unit', 'unittype', 'uiname', 'uimin', 'uimax', 'uifolder', 'doc', 'xpos', 'ypos']
+
+    def setDebug(self, debug):
         """
         Set the debug flag for the converter.
         @param debug: The debug flag.
@@ -178,7 +181,21 @@ class glTFMaterialXConverter():
             self.logger.setLevel(lg.DEBUG)
         else:
             self.logger.setLevel(lg.INFO)
-    
+
+    def setMetaData(self, metadata):
+        """
+        Set the metadata for the converter.
+        @param metadata: The metadata to set.
+        """
+        self.metadata = metadata
+
+    def getMetaData(self):
+        """
+        Get the metadata for the converter.
+        @return The metadata.
+        """
+        return self.metadata
+
     def stringToScalar(self, value, type):
         """
         Convert a supported MaterialX value string to a JSON scalar value.
@@ -202,6 +219,30 @@ class glTFMaterialXConverter():
                     return_value = float(value)
     
         return return_value
+
+    def initializeGLTFTexture(self, texture, name, uri, images):
+        """
+        Initialize a new glTF image entry and texture entry which references the image entry.
+        
+        @param texture: The glTF texture entry to initialize.
+        @param name: The name of the texture entry.
+        @param uri: The URI of the image entry.
+        @param images: The list of images to append the new image entry to.
+        """
+        image = {}
+        image[KHR_TEXTURE_PROCEDURALS_NAME] = name
+    
+        # Assuming mx.FilePath and mx.FormatPosix equivalents exist in Python context
+        # uri_path = mx.createFilePath(uri)  # Assuming mx.FilePath is a class in the context
+        # image['uri'] = uri_path.asString(mx.FormatPosix)  # Assuming asString method and FormatPosix constant exist
+        image['uri'] = uri
+    
+        images.append(image)
+    
+        texture[KHR_TEXTURE_PROCEDURALS_NAME] = name
+        texture[KHR_IMAGE_SOURCE] = len(images) - 1
+
+
 
     def materialXGraphToGLTF(self, graph, json, materials):
         """
@@ -285,8 +326,7 @@ class glTFMaterialXConverter():
         nodegraph[KHR_TEXTURE_PROCEDURALS_NODES_BLOCK] = []
         procs.append(nodegraph)
 
-        # Setup supported metadata
-        metadata = ['colorspace', 'unit', 'unittype', 'uiname', 'uimin', 'uimax', 'uifolder', 'doc']
+        metadata = self.getMetaData()
 
         # Add nodes to to dictonary. Use path as this is globally unique
         #
@@ -312,12 +352,17 @@ class glTFMaterialXConverter():
                 input_type = input.getAttribute(mx.TypedElement.TYPE_ATTRIBUTE)
                 json_node[KHR_TEXTURE_PROCEDURALS_TYPE] = input_type
                 if input_type == mx.FILENAME_TYPE_STRING:
-                    self.logger.warning('> File texture inputs not supported:', input.getNamePath())
-
-                value = input.getValueString()
-                value = self.stringToScalar(value, input_type)
-                json_node['value'] = value
-                nodegraph['inputs'].append(json_node)
+                    texture = {}
+                    filename = input.getResolvedValueString()
+                    # Initialize file texture
+                    self.initializeGLTFTexture(texture, input.getNamePath(), filename, image_array)
+                    texture_array.append(texture)
+                    json_node['texture'] = len(texture_array) - 1
+                else:
+                    value = input.getValueString()
+                    value = self.stringToScalar(value, input_type)
+                    json_node[KHR_TEXTURE_PROCEDURALS_VALUE] = value
+                nodegraph[KHR_TEXTURE_PROCEDURALS_INPUTS_BLOCK].append(json_node)
 
                 # Add input to dictionary
                 proc_dict_inputs[input.getNamePath()] = len(nodegraph[KHR_TEXTURE_PROCEDURALS_INPUTS_BLOCK]) - 1
@@ -333,6 +378,11 @@ class glTFMaterialXConverter():
 
             json_node[KHR_TEXTURE_PROCEDURALS_NODETYPE] = output.getCategory()
             json_node[KHR_TEXTURE_PROCEDURALS_TYPE] = output.getType()
+
+            # Add additional attributes to the output
+            for meta in metadata:
+                if output.getAttribute(meta):
+                    json_node[meta] = output.getAttribute(meta)
 
             # Add connection if any. Only interfacename and nodename
             # are supported.
@@ -427,11 +477,15 @@ class glTFMaterialXConverter():
                 # Node input value if any
                 elif input.getValue() is not None:
                     if input_type == mx.FILENAME_TYPE_STRING:
-                        self.logger.warning('> File texture inputs not supported:', input.getNamePath())
-
-                    value = input.getValueString()
-                    value = self.stringToScalar(value, input_type)
-                    input_item[KHR_TEXTURE_PROCEDURALS_VALUE] = value
+                        texture = {}
+                        filename = input.getResolvedValueString()
+                        self.initializeGLTFTexture(texture, input.getNamePath(), filename, image_array)
+                        texture_array.append(texture)
+                        input_item['texture'] = len(texture_array) - 1
+                    else:
+                        value = input.getValueString()
+                        value = self.stringToScalar(value, input_type)
+                        input_item[KHR_TEXTURE_PROCEDURALS_VALUE] = value
 
                 inputs.append(input_item)
 
@@ -553,11 +607,13 @@ class glTFMaterialXConverter():
                         # in the "procedurals" list
                         graphIndex = -1
                         outputIndex = -1
+                        outputsLength = 0
                         if procs:
                             for i, proc in enumerate(procs):
                                 if proc[KHR_TEXTURE_PROCEDURALS_NAME] == nodeGraphName:
                                     graphIndex = i
-                                    if len(nodeGraphOutput) > 0:
+                                    outputsLength = len(nodeGraphOutput) 
+                                    if  outputsLength > 0:
                                         for j, output in enumerate(proc[KHR_TEXTURE_PROCEDURALS_OUTPUTS_BLOCK]):
                                             if output[KHR_TEXTURE_PROCEDURALS_NAME] == nodeGraphOutput:
                                                 outputIndex = j
@@ -585,6 +641,7 @@ class glTFMaterialXConverter():
                             gltfInfo = self.materialXGraphToGLTF(graph, json_data, materials)
                             procs = gltfInfo[0]
                             outputNodes = gltfInfo[1]
+                            proceduralNodes = gltfInfo[2]
                             fallbackTextureIndex = gltfInfo[3]
 
                             # Add a fallback texture
@@ -621,6 +678,7 @@ class glTFMaterialXConverter():
                 gltfInfo = self.materialXGraphToGLTF(ng, json_data, materials)
                 procs = gltfInfo[0]
                 outputNodes = gltfInfo[1]
+                proceduralNodes = gltfInfo[2]
                 fallbackTextureIndex = gltfInfo[3]
 
         if len(materials) > 0:
