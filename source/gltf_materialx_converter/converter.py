@@ -186,7 +186,7 @@ class glTFMaterialXConverter():
         self.logger = lg.getLogger('glTFMtlx')
         lg.basicConfig(level=lg.INFO)  
 
-        # Supported types, and metadata
+        # Options for conversion from Materialx
         self.supported_types = ['boolean', 'string', 'integer', 'matrix33', 'matrix44', 'vector2', 'vector3', 'vector4', 'float', 'color3', 'color4']
         self.supported_scalar_types = ['integer', 'matrix33', 'matrix44', 'vector2', 'vector3', 'vector4', 'float', 'color3', 'color4']
         self.supported_array_types = ['matrix33', 'matrix44', 'vector2', 'vector3', 'vector4', 'color3', 'color4']
@@ -555,20 +555,20 @@ class glTFMaterialXConverter():
 
         return [procs, nodegraph_outputs, nodegraph_nodes]
 
-    def materialXtoGLTF(self, mtlxDoc):
+    def materialXtoGLTF(self, mtlx_doc):
         '''
         @brief Convert a MaterialX document to glTF.
-        @param mtlxDoc: The MaterialX document to convert.
+        @param mtlx_doc: The MaterialX document to convert.
         @return glTF JSON string and status message.
         '''
 
         status = ''
-        if not mtlxDoc:
+        if not mtlx_doc:
             status = 'Invalid document to convert'
             return None, status
 
         materials = []
-        mx_materials = mtlxDoc.getMaterialNodes()
+        mx_materials = mtlx_doc.getMaterialNodes()
         if len(mx_materials) == 0:
             self.logger.warning('> No materials found in document')
             #return None, status # No MaterialX materials found in the document
@@ -587,62 +587,62 @@ class glTFMaterialXConverter():
             ['base_color', 'baseColorTexture', 'pbrMetallicRoughness']
         ]
 
-        pbrNodes = {}
+        pbr_nodes = {}
         fallback_texture_index = -1
         fallback_image_data = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAADElEQVQI12P4z/AfAAQAAf/zKSWvAAAAAElFTkSuQmCC'
         procs = []
         export_graph_names = []
 
-        extensionsUsed = [KHR_TEXTURE_PROCEDURALS, EXT_TEXTURE_PROCEDURALS_MX_1_39]
+        extensions_used = [KHR_TEXTURE_PROCEDURALS, EXT_TEXTURE_PROCEDURALS_MX_1_39]
 
         # Scan for materials
         for mxMaterial in mx_materials:
-            mxshaders = mx.getShaderNodes(mxMaterial)
+            mtlx_shaders = mx.getShaderNodes(mxMaterial)
 
             # Scan for shaders for the material
-            for shaderNode in mxshaders:                
-                category = shaderNode.getCategory()
-                path = shaderNode.getNamePath()
-                isPBR = (category == MTLX_GLTF_PBR_CATEGORY)
+            for shader_node in mtlx_shaders:                
+                category = shader_node.getCategory()
+                path = shader_node.getNamePath()
+                is_pbr = (category == MTLX_GLTF_PBR_CATEGORY)
 
-                if (isPBR) and pbrNodes.get(path) is None:
+                if (is_pbr) and pbr_nodes.get(path) is None:
                     # Add fallback if not already added
                     if fallback_texture_index == -1:
                         fallback_texture_index = self.addFallbackTexture(json_data, fallback_image_data)
 
-                    self.logger.info(f'> Convert shader to glTF: {shaderNode.getNamePath()}. Category: {category}')
-                    pbrNodes[path] = shaderNode
+                    self.logger.info(f'> Convert shader to glTF: {shader_node.getNamePath()}. Category: {category}')
+                    pbr_nodes[path] = shader_node
 
                     material = {}
 
                     material[KHR_TEXTURE_PROCEDURALS_NAME] = path
 
-                    base_color_input = None
-                    base_color_output = ''
-                    input_paris = input_maps[category]
+                    shader_node_input = None
+                    shader_node_output = ''
+                    input_pairs = input_maps[category]
 
                     # Scan through support inupt channels
-                    for inputPair in input_paris:
-                        base_color_input = shaderNode.getInput(inputPair[0])
-                        base_color_output = inputPair[1]
+                    for input_pair in input_pairs:
+                        shader_node_input = shader_node.getInput(input_pair[0])
+                        shader_node_output = input_pair[1]
 
-                        if not base_color_input:
+                        if not shader_node_input:
                             continue
 
                         # Check for upstream nodegraph connection. Skip if not found
-                        nodegraph_name = base_color_input.getNodeGraphString()
+                        nodegraph_name = shader_node_input.getNodeGraphString()
                         if len(nodegraph_name) == 0:
                             continue
 
                         # Check for upstream nodegraph output connection.
-                        nodegraph_output = base_color_input.getOutputString()
+                        nodegraph_output = shader_node_input.getOutputString()
 
                         # Determine the parent of the input
                         parent = material
-                        if len(inputPair[2]) > 0:
-                            if inputPair[2] not in material:
-                                material[inputPair[2]] = {}
-                            parent = material[inputPair[2]]
+                        if len(input_pair[2]) > 0:
+                            if input_pair[2] not in material:
+                                material[input_pair[2]] = {}
+                            parent = material[input_pair[2]]
 
                         # Check for an existing converted graph and / or output index
                         # in the "procedurals" list
@@ -663,9 +663,9 @@ class glTFMaterialXConverter():
 
                         # Make the connection to the input on the material if the graph is already converted
                         if graph_index >= 0:
-                            base_color_texture = parent[base_color_output] = {}
-                            base_color_texture[KHR_TEXTURE_PROCEDURALS_INDEX] = fallback_texture_index
-                            ext = base_color_texture[KHR_EXTENSIONS_BLOCK] = {}
+                            shader_input_texture = parent[shader_node_output] = {}
+                            shader_input_texture[KHR_TEXTURE_PROCEDURALS_INDEX] = fallback_texture_index
+                            ext = shader_input_texture[KHR_EXTENSIONS_BLOCK] = {}
 
                             # Set up graph index and output index. Only set output index if 
                             # the graph has more than one output
@@ -676,7 +676,7 @@ class glTFMaterialXConverter():
                         
                         # Convert the graph
                         else:
-                            graph = mtlxDoc.getNodeGraph(nodegraph_name)
+                            graph = mtlx_doc.getNodeGraph(nodegraph_name)
                             export_graph_names.append(nodegraph_name)
 
                             gltf_info = self.materialXGraphToGLTF(graph, json_data)
@@ -684,9 +684,9 @@ class glTFMaterialXConverter():
                             output_nodes = gltf_info[1]
 
                             # Add a fallback texture
-                            base_color_texture = parent[base_color_output] = {}
-                            base_color_texture[KHR_TEXTURE_PROCEDURALS_INDEX] = fallback_texture_index
-                            ext = base_color_texture[KHR_EXTENSIONS_BLOCK] = {}
+                            shader_input_texture = parent[shader_node_output] = {}
+                            shader_input_texture[KHR_TEXTURE_PROCEDURALS_INDEX] = fallback_texture_index
+                            ext = shader_input_texture[KHR_EXTENSIONS_BLOCK] = {}
                             lookup = ext[KHR_TEXTURE_PROCEDURALS] = {}
                             lookup[KHR_TEXTURE_PROCEDURALS_INDEX] = len(procs) - 1
                             output_index = -1
@@ -708,7 +708,7 @@ class glTFMaterialXConverter():
 
         # Scan for unconnected graphs
         unconnected_graphs = []
-        for ng in mtlxDoc.getNodeGraphs():
+        for ng in mtlx_doc.getNodeGraphs():
             ng_name = ng.getName()
             if ng.getAttribute(MTLX_NODEDEF_NAME_ATTRIBUTE) or ng.hasSourceUri():
                 continue
@@ -731,7 +731,7 @@ class glTFMaterialXConverter():
         # Add asset and extensions use blocks
         if len(procs) > 0:
             json_data[KHR_ASSET_BLOCK] = json_asset
-            json_data[KHR_EXTENTIONSUSED_BLOCK] = extensionsUsed
+            json_data[KHR_EXTENTIONSUSED_BLOCK] = extensions_used
 
         # Get the JSON string back
         json_string = json.dumps(json_data, indent=2) if json_data else ''

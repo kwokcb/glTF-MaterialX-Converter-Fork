@@ -145,9 +145,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:aca2b95f0687103c3df9421fd52fed809" id="r_aca2b95f0687103c3df9421fd52fed809"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aca2b95f0687103c3df9421fd52fed809">materialXGraphToGLTF</a> (self, graph, json)</td></tr>
 <tr class="memdesc:aca2b95f0687103c3df9421fd52fed809"><td class="mdescLeft">&#160;</td><td class="mdescRight">Export a MaterialX nodegraph to a glTF procedural graph.  <br /></td></tr>
 <tr class="separator:aca2b95f0687103c3df9421fd52fed809"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a13dd4d09a0cda6a38b0290c9c2da64dc" id="r_a13dd4d09a0cda6a38b0290c9c2da64dc"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a13dd4d09a0cda6a38b0290c9c2da64dc">materialXtoGLTF</a> (self, mtlxDoc)</td></tr>
-<tr class="memdesc:a13dd4d09a0cda6a38b0290c9c2da64dc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert a MaterialX document to glTF.  <br /></td></tr>
-<tr class="separator:a13dd4d09a0cda6a38b0290c9c2da64dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a777f89bb1d6aa44dab5f665308b4b2bf" id="r_a777f89bb1d6aa44dab5f665308b4b2bf"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a777f89bb1d6aa44dab5f665308b4b2bf">materialXtoGLTF</a> (self, mtlx_doc)</td></tr>
+<tr class="memdesc:a777f89bb1d6aa44dab5f665308b4b2bf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert a MaterialX document to glTF.  <br /></td></tr>
+<tr class="separator:a777f89bb1d6aa44dab5f665308b4b2bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
@@ -230,7 +230,7 @@ Public Attributes</h2></td></tr>
 <div class="line"><span class="lineno">  186</span>        self.logger = lg.getLogger(<span class="stringliteral">&#39;glTFMtlx&#39;</span>)</div>
 <div class="line"><span class="lineno">  187</span>        lg.basicConfig(level=lg.INFO)  </div>
 <div class="line"><span class="lineno">  188</span> </div>
-<div class="line"><span class="lineno">  189</span>        <span class="comment"># Supported types, and metadata</span></div>
+<div class="line"><span class="lineno">  189</span>        <span class="comment"># Options for conversion from Materialx</span></div>
 <div class="line"><span class="lineno">  190</span>        self.supported_types = [<span class="stringliteral">&#39;boolean&#39;</span>, <span class="stringliteral">&#39;string&#39;</span>, <span class="stringliteral">&#39;integer&#39;</span>, <span class="stringliteral">&#39;matrix33&#39;</span>, <span class="stringliteral">&#39;matrix44&#39;</span>, <span class="stringliteral">&#39;vector2&#39;</span>, <span class="stringliteral">&#39;vector3&#39;</span>, <span class="stringliteral">&#39;vector4&#39;</span>, <span class="stringliteral">&#39;float&#39;</span>, <span class="stringliteral">&#39;color3&#39;</span>, <span class="stringliteral">&#39;color4&#39;</span>]</div>
 <div class="line"><span class="lineno">  191</span>        self.supported_scalar_types = [<span class="stringliteral">&#39;integer&#39;</span>, <span class="stringliteral">&#39;matrix33&#39;</span>, <span class="stringliteral">&#39;matrix44&#39;</span>, <span class="stringliteral">&#39;vector2&#39;</span>, <span class="stringliteral">&#39;vector3&#39;</span>, <span class="stringliteral">&#39;vector4&#39;</span>, <span class="stringliteral">&#39;float&#39;</span>, <span class="stringliteral">&#39;color3&#39;</span>, <span class="stringliteral">&#39;color4&#39;</span>]</div>
 <div class="line"><span class="lineno">  192</span>        self.supported_array_types = [<span class="stringliteral">&#39;matrix33&#39;</span>, <span class="stringliteral">&#39;matrix44&#39;</span>, <span class="stringliteral">&#39;vector2&#39;</span>, <span class="stringliteral">&#39;vector3&#39;</span>, <span class="stringliteral">&#39;vector4&#39;</span>, <span class="stringliteral">&#39;color3&#39;</span>, <span class="stringliteral">&#39;color4&#39;</span>]</div>
@@ -710,8 +710,8 @@ Public Attributes</h2></td></tr>
 </div><!-- fragment -->
 </div>
 </div>
-<a id="a13dd4d09a0cda6a38b0290c9c2da64dc" name="a13dd4d09a0cda6a38b0290c9c2da64dc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a13dd4d09a0cda6a38b0290c9c2da64dc">&#9670;&#160;</a></span>materialXtoGLTF()</h2>
+<a id="a777f89bb1d6aa44dab5f665308b4b2bf" name="a777f89bb1d6aa44dab5f665308b4b2bf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a777f89bb1d6aa44dab5f665308b4b2bf">&#9670;&#160;</a></span>materialXtoGLTF()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -724,7 +724,7 @@ Public Attributes</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>mtlxDoc</em></span>&#160;)</td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>mtlx_doc</em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -732,27 +732,27 @@ Public Attributes</h2></td></tr>
 <p>Convert a MaterialX document to glTF. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">mtlxDoc</td><td>The MaterialX document to convert. </td></tr>
+    <tr><td class="paramname">mtlx_doc</td><td>The MaterialX document to convert. </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>glTF JSON string and status message. </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="converter_8py_source.html#l00558">558</a> of file <a class="el" href="converter_8py_source.html">converter.py</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  558</span>    <span class="keyword">def </span>materialXtoGLTF(self, mtlxDoc):</div>
+<div class="fragment"><div class="line"><span class="lineno">  558</span>    <span class="keyword">def </span>materialXtoGLTF(self, mtlx_doc):</div>
 <div class="line"><span class="lineno">  559</span>        <span class="stringliteral">&#39;&#39;&#39;</span></div>
 <div class="line"><span class="lineno">  560</span><span class="stringliteral">        @brief Convert a MaterialX document to glTF.</span></div>
-<div class="line"><span class="lineno">  561</span><span class="stringliteral">        @param mtlxDoc: The MaterialX document to convert.</span></div>
+<div class="line"><span class="lineno">  561</span><span class="stringliteral">        @param mtlx_doc: The MaterialX document to convert.</span></div>
 <div class="line"><span class="lineno">  562</span><span class="stringliteral">        @return glTF JSON string and status message.</span></div>
 <div class="line"><span class="lineno">  563</span><span class="stringliteral">        &#39;&#39;&#39;</span></div>
 <div class="line"><span class="lineno">  564</span> </div>
 <div class="line"><span class="lineno">  565</span>        status = <span class="stringliteral">&#39;&#39;</span></div>
-<div class="line"><span class="lineno">  566</span>        <span class="keywordflow">if</span> <span class="keywordflow">not</span> mtlxDoc:</div>
+<div class="line"><span class="lineno">  566</span>        <span class="keywordflow">if</span> <span class="keywordflow">not</span> mtlx_doc:</div>
 <div class="line"><span class="lineno">  567</span>            status = <span class="stringliteral">&#39;Invalid document to convert&#39;</span></div>
 <div class="line"><span class="lineno">  568</span>            <span class="keywordflow">return</span> <span class="keywordtype">None</span>, status</div>
 <div class="line"><span class="lineno">  569</span> </div>
 <div class="line"><span class="lineno">  570</span>        materials = []</div>
-<div class="line"><span class="lineno">  571</span>        mx_materials = mtlxDoc.getMaterialNodes()</div>
+<div class="line"><span class="lineno">  571</span>        mx_materials = mtlx_doc.getMaterialNodes()</div>
 <div class="line"><span class="lineno">  572</span>        <span class="keywordflow">if</span> len(mx_materials) == 0:</div>
 <div class="line"><span class="lineno">  573</span>            self.logger.warning(<span class="stringliteral">&#39;&gt; No materials found in document&#39;</span>)</div>
 <div class="line"><span class="lineno">  574</span>            <span class="comment">#return None, status # No MaterialX materials found in the document</span></div>
@@ -771,62 +771,62 @@ Public Attributes</h2></td></tr>
 <div class="line"><span class="lineno">  587</span>            [<span class="stringliteral">&#39;base_color&#39;</span>, <span class="stringliteral">&#39;baseColorTexture&#39;</span>, <span class="stringliteral">&#39;pbrMetallicRoughness&#39;</span>]</div>
 <div class="line"><span class="lineno">  588</span>        ]</div>
 <div class="line"><span class="lineno">  589</span> </div>
-<div class="line"><span class="lineno">  590</span>        pbrNodes = {}</div>
+<div class="line"><span class="lineno">  590</span>        pbr_nodes = {}</div>
 <div class="line"><span class="lineno">  591</span>        fallback_texture_index = -1</div>
 <div class="line"><span class="lineno">  592</span>        fallback_image_data = <span class="stringliteral">&#39;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAADElEQVQI12P4z/AfAAQAAf/zKSWvAAAAAElFTkSuQmCC&#39;</span></div>
 <div class="line"><span class="lineno">  593</span>        procs = []</div>
 <div class="line"><span class="lineno">  594</span>        export_graph_names = []</div>
 <div class="line"><span class="lineno">  595</span> </div>
-<div class="line"><span class="lineno">  596</span>        extensionsUsed = [KHR_TEXTURE_PROCEDURALS, EXT_TEXTURE_PROCEDURALS_MX_1_39]</div>
+<div class="line"><span class="lineno">  596</span>        extensions_used = [KHR_TEXTURE_PROCEDURALS, EXT_TEXTURE_PROCEDURALS_MX_1_39]</div>
 <div class="line"><span class="lineno">  597</span> </div>
 <div class="line"><span class="lineno">  598</span>        <span class="comment"># Scan for materials</span></div>
 <div class="line"><span class="lineno">  599</span>        <span class="keywordflow">for</span> mxMaterial <span class="keywordflow">in</span> mx_materials:</div>
-<div class="line"><span class="lineno">  600</span>            mxshaders = mx.getShaderNodes(mxMaterial)</div>
+<div class="line"><span class="lineno">  600</span>            mtlx_shaders = mx.getShaderNodes(mxMaterial)</div>
 <div class="line"><span class="lineno">  601</span> </div>
 <div class="line"><span class="lineno">  602</span>            <span class="comment"># Scan for shaders for the material</span></div>
-<div class="line"><span class="lineno">  603</span>            <span class="keywordflow">for</span> shaderNode <span class="keywordflow">in</span> mxshaders:                </div>
-<div class="line"><span class="lineno">  604</span>                category = shaderNode.getCategory()</div>
-<div class="line"><span class="lineno">  605</span>                path = shaderNode.getNamePath()</div>
-<div class="line"><span class="lineno">  606</span>                isPBR = (category == MTLX_GLTF_PBR_CATEGORY)</div>
+<div class="line"><span class="lineno">  603</span>            <span class="keywordflow">for</span> shader_node <span class="keywordflow">in</span> mtlx_shaders:                </div>
+<div class="line"><span class="lineno">  604</span>                category = shader_node.getCategory()</div>
+<div class="line"><span class="lineno">  605</span>                path = shader_node.getNamePath()</div>
+<div class="line"><span class="lineno">  606</span>                is_pbr = (category == MTLX_GLTF_PBR_CATEGORY)</div>
 <div class="line"><span class="lineno">  607</span> </div>
-<div class="line"><span class="lineno">  608</span>                <span class="keywordflow">if</span> (isPBR) <span class="keywordflow">and</span> pbrNodes.get(path) <span class="keywordflow">is</span> <span class="keywordtype">None</span>:</div>
+<div class="line"><span class="lineno">  608</span>                <span class="keywordflow">if</span> (is_pbr) <span class="keywordflow">and</span> pbr_nodes.get(path) <span class="keywordflow">is</span> <span class="keywordtype">None</span>:</div>
 <div class="line"><span class="lineno">  609</span>                    <span class="comment"># Add fallback if not already added</span></div>
 <div class="line"><span class="lineno">  610</span>                    <span class="keywordflow">if</span> fallback_texture_index == -1:</div>
 <div class="line"><span class="lineno">  611</span>                        fallback_texture_index = self.addFallbackTexture(json_data, fallback_image_data)</div>
 <div class="line"><span class="lineno">  612</span> </div>
-<div class="line"><span class="lineno">  613</span>                    self.logger.info(f<span class="stringliteral">&#39;&gt; Convert shader to glTF: {shaderNode.getNamePath()}. Category: {category}&#39;</span>)</div>
-<div class="line"><span class="lineno">  614</span>                    pbrNodes[path] = shaderNode</div>
+<div class="line"><span class="lineno">  613</span>                    self.logger.info(f<span class="stringliteral">&#39;&gt; Convert shader to glTF: {shader_node.getNamePath()}. Category: {category}&#39;</span>)</div>
+<div class="line"><span class="lineno">  614</span>                    pbr_nodes[path] = shader_node</div>
 <div class="line"><span class="lineno">  615</span> </div>
 <div class="line"><span class="lineno">  616</span>                    material = {}</div>
 <div class="line"><span class="lineno">  617</span> </div>
 <div class="line"><span class="lineno">  618</span>                    material[KHR_TEXTURE_PROCEDURALS_NAME] = path</div>
 <div class="line"><span class="lineno">  619</span> </div>
-<div class="line"><span class="lineno">  620</span>                    base_color_input = <span class="keywordtype">None</span></div>
-<div class="line"><span class="lineno">  621</span>                    base_color_output = <span class="stringliteral">&#39;&#39;</span></div>
-<div class="line"><span class="lineno">  622</span>                    input_paris = input_maps[category]</div>
+<div class="line"><span class="lineno">  620</span>                    shader_node_input = <span class="keywordtype">None</span></div>
+<div class="line"><span class="lineno">  621</span>                    shader_node_output = <span class="stringliteral">&#39;&#39;</span></div>
+<div class="line"><span class="lineno">  622</span>                    input_pairs = input_maps[category]</div>
 <div class="line"><span class="lineno">  623</span> </div>
 <div class="line"><span class="lineno">  624</span>                    <span class="comment"># Scan through support inupt channels</span></div>
-<div class="line"><span class="lineno">  625</span>                    <span class="keywordflow">for</span> inputPair <span class="keywordflow">in</span> input_paris:</div>
-<div class="line"><span class="lineno">  626</span>                        base_color_input = shaderNode.getInput(inputPair[0])</div>
-<div class="line"><span class="lineno">  627</span>                        base_color_output = inputPair[1]</div>
+<div class="line"><span class="lineno">  625</span>                    <span class="keywordflow">for</span> input_pair <span class="keywordflow">in</span> input_pairs:</div>
+<div class="line"><span class="lineno">  626</span>                        shader_node_input = shader_node.getInput(input_pair[0])</div>
+<div class="line"><span class="lineno">  627</span>                        shader_node_output = input_pair[1]</div>
 <div class="line"><span class="lineno">  628</span> </div>
-<div class="line"><span class="lineno">  629</span>                        <span class="keywordflow">if</span> <span class="keywordflow">not</span> base_color_input:</div>
+<div class="line"><span class="lineno">  629</span>                        <span class="keywordflow">if</span> <span class="keywordflow">not</span> shader_node_input:</div>
 <div class="line"><span class="lineno">  630</span>                            <span class="keywordflow">continue</span></div>
 <div class="line"><span class="lineno">  631</span> </div>
 <div class="line"><span class="lineno">  632</span>                        <span class="comment"># Check for upstream nodegraph connection. Skip if not found</span></div>
-<div class="line"><span class="lineno">  633</span>                        nodegraph_name = base_color_input.getNodeGraphString()</div>
+<div class="line"><span class="lineno">  633</span>                        nodegraph_name = shader_node_input.getNodeGraphString()</div>
 <div class="line"><span class="lineno">  634</span>                        <span class="keywordflow">if</span> len(nodegraph_name) == 0:</div>
 <div class="line"><span class="lineno">  635</span>                            <span class="keywordflow">continue</span></div>
 <div class="line"><span class="lineno">  636</span> </div>
 <div class="line"><span class="lineno">  637</span>                        <span class="comment"># Check for upstream nodegraph output connection.</span></div>
-<div class="line"><span class="lineno">  638</span>                        nodegraph_output = base_color_input.getOutputString()</div>
+<div class="line"><span class="lineno">  638</span>                        nodegraph_output = shader_node_input.getOutputString()</div>
 <div class="line"><span class="lineno">  639</span> </div>
 <div class="line"><span class="lineno">  640</span>                        <span class="comment"># Determine the parent of the input</span></div>
 <div class="line"><span class="lineno">  641</span>                        parent = material</div>
-<div class="line"><span class="lineno">  642</span>                        <span class="keywordflow">if</span> len(inputPair[2]) &gt; 0:</div>
-<div class="line"><span class="lineno">  643</span>                            <span class="keywordflow">if</span> inputPair[2] <span class="keywordflow">not</span> <span class="keywordflow">in</span> material:</div>
-<div class="line"><span class="lineno">  644</span>                                material[inputPair[2]] = {}</div>
-<div class="line"><span class="lineno">  645</span>                            parent = material[inputPair[2]]</div>
+<div class="line"><span class="lineno">  642</span>                        <span class="keywordflow">if</span> len(input_pair[2]) &gt; 0:</div>
+<div class="line"><span class="lineno">  643</span>                            <span class="keywordflow">if</span> input_pair[2] <span class="keywordflow">not</span> <span class="keywordflow">in</span> material:</div>
+<div class="line"><span class="lineno">  644</span>                                material[input_pair[2]] = {}</div>
+<div class="line"><span class="lineno">  645</span>                            parent = material[input_pair[2]]</div>
 <div class="line"><span class="lineno">  646</span> </div>
 <div class="line"><span class="lineno">  647</span>                        <span class="comment"># Check for an existing converted graph and / or output index</span></div>
 <div class="line"><span class="lineno">  648</span>                        <span class="comment"># in the &quot;procedurals&quot; list</span></div>
@@ -847,9 +847,9 @@ Public Attributes</h2></td></tr>
 <div class="line"><span class="lineno">  663</span> </div>
 <div class="line"><span class="lineno">  664</span>                        <span class="comment"># Make the connection to the input on the material if the graph is already converted</span></div>
 <div class="line"><span class="lineno">  665</span>                        <span class="keywordflow">if</span> graph_index &gt;= 0:</div>
-<div class="line"><span class="lineno">  666</span>                            base_color_texture = parent[base_color_output] = {}</div>
-<div class="line"><span class="lineno">  667</span>                            base_color_texture[KHR_TEXTURE_PROCEDURALS_INDEX] = fallback_texture_index</div>
-<div class="line"><span class="lineno">  668</span>                            ext = base_color_texture[KHR_EXTENSIONS_BLOCK] = {}</div>
+<div class="line"><span class="lineno">  666</span>                            shader_input_texture = parent[shader_node_output] = {}</div>
+<div class="line"><span class="lineno">  667</span>                            shader_input_texture[KHR_TEXTURE_PROCEDURALS_INDEX] = fallback_texture_index</div>
+<div class="line"><span class="lineno">  668</span>                            ext = shader_input_texture[KHR_EXTENSIONS_BLOCK] = {}</div>
 <div class="line"><span class="lineno">  669</span> </div>
 <div class="line"><span class="lineno">  670</span>                            <span class="comment"># Set up graph index and output index. Only set output index if </span></div>
 <div class="line"><span class="lineno">  671</span>                            <span class="comment"># the graph has more than one output</span></div>
@@ -860,7 +860,7 @@ Public Attributes</h2></td></tr>
 <div class="line"><span class="lineno">  676</span>                        </div>
 <div class="line"><span class="lineno">  677</span>                        <span class="comment"># Convert the graph</span></div>
 <div class="line"><span class="lineno">  678</span>                        <span class="keywordflow">else</span>:</div>
-<div class="line"><span class="lineno">  679</span>                            graph = mtlxDoc.getNodeGraph(nodegraph_name)</div>
+<div class="line"><span class="lineno">  679</span>                            graph = mtlx_doc.getNodeGraph(nodegraph_name)</div>
 <div class="line"><span class="lineno">  680</span>                            export_graph_names.append(nodegraph_name)</div>
 <div class="line"><span class="lineno">  681</span> </div>
 <div class="line"><span class="lineno">  682</span>                            gltf_info = self.materialXGraphToGLTF(graph, json_data)</div>
@@ -868,9 +868,9 @@ Public Attributes</h2></td></tr>
 <div class="line"><span class="lineno">  684</span>                            output_nodes = gltf_info[1]</div>
 <div class="line"><span class="lineno">  685</span> </div>
 <div class="line"><span class="lineno">  686</span>                            <span class="comment"># Add a fallback texture</span></div>
-<div class="line"><span class="lineno">  687</span>                            base_color_texture = parent[base_color_output] = {}</div>
-<div class="line"><span class="lineno">  688</span>                            base_color_texture[KHR_TEXTURE_PROCEDURALS_INDEX] = fallback_texture_index</div>
-<div class="line"><span class="lineno">  689</span>                            ext = base_color_texture[KHR_EXTENSIONS_BLOCK] = {}</div>
+<div class="line"><span class="lineno">  687</span>                            shader_input_texture = parent[shader_node_output] = {}</div>
+<div class="line"><span class="lineno">  688</span>                            shader_input_texture[KHR_TEXTURE_PROCEDURALS_INDEX] = fallback_texture_index</div>
+<div class="line"><span class="lineno">  689</span>                            ext = shader_input_texture[KHR_EXTENSIONS_BLOCK] = {}</div>
 <div class="line"><span class="lineno">  690</span>                            lookup = ext[KHR_TEXTURE_PROCEDURALS] = {}</div>
 <div class="line"><span class="lineno">  691</span>                            lookup[KHR_TEXTURE_PROCEDURALS_INDEX] = len(procs) - 1</div>
 <div class="line"><span class="lineno">  692</span>                            output_index = -1</div>
@@ -892,7 +892,7 @@ Public Attributes</h2></td></tr>
 <div class="line"><span class="lineno">  708</span> </div>
 <div class="line"><span class="lineno">  709</span>        <span class="comment"># Scan for unconnected graphs</span></div>
 <div class="line"><span class="lineno">  710</span>        unconnected_graphs = []</div>
-<div class="line"><span class="lineno">  711</span>        <span class="keywordflow">for</span> ng <span class="keywordflow">in</span> mtlxDoc.getNodeGraphs():</div>
+<div class="line"><span class="lineno">  711</span>        <span class="keywordflow">for</span> ng <span class="keywordflow">in</span> mtlx_doc.getNodeGraphs():</div>
 <div class="line"><span class="lineno">  712</span>            ng_name = ng.getName()</div>
 <div class="line"><span class="lineno">  713</span>            <span class="keywordflow">if</span> ng.getAttribute(MTLX_NODEDEF_NAME_ATTRIBUTE) <span class="keywordflow">or</span> ng.hasSourceUri():</div>
 <div class="line"><span class="lineno">  714</span>                <span class="keywordflow">continue</span></div>
@@ -915,7 +915,7 @@ Public Attributes</h2></td></tr>
 <div class="line"><span class="lineno">  731</span>        <span class="comment"># Add asset and extensions use blocks</span></div>
 <div class="line"><span class="lineno">  732</span>        <span class="keywordflow">if</span> len(procs) &gt; 0:</div>
 <div class="line"><span class="lineno">  733</span>            json_data[KHR_ASSET_BLOCK] = json_asset</div>
-<div class="line"><span class="lineno">  734</span>            json_data[KHR_EXTENTIONSUSED_BLOCK] = extensionsUsed</div>
+<div class="line"><span class="lineno">  734</span>            json_data[KHR_EXTENTIONSUSED_BLOCK] = extensions_used</div>
 <div class="line"><span class="lineno">  735</span> </div>
 <div class="line"><span class="lineno">  736</span>        <span class="comment"># Get the JSON string back</span></div>
 <div class="line"><span class="lineno">  737</span>        json_string = json.dumps(json_data, indent=2) <span class="keywordflow">if</span> json_data <span class="keywordflow">else</span> <span class="stringliteral">&#39;&#39;</span></div>

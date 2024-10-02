@@ -5,7 +5,7 @@ var classgltf__materialx__converter_1_1converter_1_1gl_t_f_material_x_converter 
     [ "getMetaData", "classgltf__materialx__converter_1_1converter_1_1gl_t_f_material_x_converter.html#a281152b32096c9f00ae17dc76d115b25", null ],
     [ "initializeGLTFTexture", "classgltf__materialx__converter_1_1converter_1_1gl_t_f_material_x_converter.html#aa3398dc2465c52711c9a3619907ac72e", null ],
     [ "materialXGraphToGLTF", "classgltf__materialx__converter_1_1converter_1_1gl_t_f_material_x_converter.html#aca2b95f0687103c3df9421fd52fed809", null ],
-    [ "materialXtoGLTF", "classgltf__materialx__converter_1_1converter_1_1gl_t_f_material_x_converter.html#a13dd4d09a0cda6a38b0290c9c2da64dc", null ],
+    [ "materialXtoGLTF", "classgltf__materialx__converter_1_1converter_1_1gl_t_f_material_x_converter.html#a777f89bb1d6aa44dab5f665308b4b2bf", null ],
     [ "setDebug", "classgltf__materialx__converter_1_1converter_1_1gl_t_f_material_x_converter.html#a122308eed2e043c1d2f1b5eb5e4a5538", null ],
     [ "setMetaData", "classgltf__materialx__converter_1_1converter_1_1gl_t_f_material_x_converter.html#aa2d09aaec15970dc73c4344e96ac9f1f", null ],
     [ "stringToScalar", "classgltf__materialx__converter_1_1converter_1_1gl_t_f_material_x_converter.html#a4a7697df181cc733606b98cf97de80e3", null ],
