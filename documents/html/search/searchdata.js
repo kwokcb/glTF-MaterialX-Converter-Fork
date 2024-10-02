@@ -4,8 +4,8 @@ var indexSectionsWithContent =
   1: "gm",
   2: "g",
   3: "_cmru",
-  4: "_cgilmrstv",
-  5: "aeklms",
+  4: "_acgilmrstv",
+  5: "eklms",
   6: "gimp"
 };
 

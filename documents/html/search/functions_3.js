@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['importlibraries_0',['importLibraries',['../namespacegltf__materialx__converter_1_1utilities.html#a6f9828d270d3c5107a82918662a0bcd7',1,'gltf_materialx_converter::utilities']]],
-  ['initializegltftexture_1',['initializeGLTFTexture',['../classgltf__materialx__converter_1_1converter_1_1gl_t_f_material_x_converter.html#aa3398dc2465c52711c9a3619907ac72e',1,'gltf_materialx_converter::converter::glTFMaterialXConverter']]]
+  ['getfiles_0',['getFiles',['../namespacegltf__materialx__converter_1_1utilities.html#a887008af52786ab012d1d526979f1bad',1,'gltf_materialx_converter::utilities']]],
+  ['getmetadata_1',['getMetaData',['../classgltf__materialx__converter_1_1converter_1_1gl_t_f_material_x_converter.html#a281152b32096c9f00ae17dc76d115b25',1,'gltf_materialx_converter::converter::glTFMaterialXConverter']]]
 ];
