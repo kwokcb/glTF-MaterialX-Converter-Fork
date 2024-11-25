@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>README.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://cdn.jsdelivr.net/npm/mermaid@9/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="introduction">Introduction</h1>
+<p>The Khronos glTF PBR material defines a real-time shading model for real-world application. The inputs that can be mapped to this model are currently restricted to 2d images.</p>
+<p>The proposed texture procedurals extension (<a href="https://github.com/KhronosGroup/glTF/tree/KHR_texture_procedurals/extensions/2.0/Khronos/KHR_texture_procedurals">KHR_texture_procedurals</a>)<br>
+provides the ability to extend this by allowing for the representation of shading graphs (procedural graphs)<br>
+and the ability to connect these to existing glTF PBR material inputs.</p>
+<h2 id="properties">Properties</h2>
+<p>This allows for the following properties:</p>
+<h3 id="increased-flexibility-and-fidelity">Increased flexibility and fidelity</h3>
+<p>Graphs no longer need to be &quot;baked&quot; into 2d images. For instance this allows for any 3d positional dependent graphs such as a 3d texture, or a view dependent pattern to be defined.</p>
+<p>Figure: Shows a material mapped with a 3d marble. The results of simple baking are shown on the right along with the baked image. Fidelity and 3d placement information may be lost. Flexibility to adjust and animate the pattern without re-baking at run-time is also list.</p>
+<table>
+<tr>
+<td>
+<img src="marble_procedural.png" width=100%>
+<td>
+<img src="marble_procedural_baked.png" width=100%>
+<td>
+<img src="baked_texture.png" width=100%>
+</tr>
+</table>
+<h3 id="lossless-interoperability">Lossless Interoperability</h3>
+<p>Nodes and graphs are defined adhere to the schema provided by MaterialX which either exactly or<br>
+closely matches the OpenUSD schema for shading graphs. As both use the exact same logic the rendered results are predictable and<br>
+reproducible.</p>
+<p>Figure: Shows the same material which was converted from glTF to MaterialX and then imported into OpenUSD for rendering.</p>
+<table>
+<tr>
+<td>
+<img src="marble_procedural_usd.png" width=45%>
+</tr>
+</table>
+<p>Storage is in JSON format allowing for run-time properties not afforded to by the existing MaterialX XML format.</p>
+<h3 id="separability-and-incremental-adoption">Separability and Incremental Adoption</h3>
+<p>Procedural graph content can be stored independently from other glTF content as bindings<br>
+are specified external to the procedural descriptions.<br>
+This separability and the fact that the extension can be added incrementally<br>
+allow for procedural support to be added incrementally to existing or new content in a non-destructive manner.</p>
+<h2 id="composition">Composition</h2>
+<p>Procedurals are specified as acyclic graphs of nodes which provide the computation logic.</p>
+<p>The results can be routed to one or more outputs nodes. The input interface to the graph can be specified by one or more input nodes which map to graph node inputs.</p>
+<p>Figure: Below is an example procedural graph, with interface inputs in blue and outputs in green.</p>
+<pre><code class="language-mermaid"><div class="mermaid">graph LR; 
+    NG_checkerboard_color3_N_mtlxmix[mix] --> NG_checkerboard_color3_out([out])
+    style NG_checkerboard_color3_out fill:#0C0, color:#111
+    NG_checkerboard_color3_color2INT([color2]) ==.bg==> NG_checkerboard_color3_N_mtlxmix[mix]
+    style NG_checkerboard_color3_color2INT fill:#0CF, color:#111
+    NG_checkerboard_color3_color1INT([color1]) ==.fg==> NG_checkerboard_color3_N_mtlxmix[mix]
+    style NG_checkerboard_color3_color1INT fill:#0CF, color:#111
+    NG_checkerboard_color3_N_modulo[modulo] --".mix"--> NG_checkerboard_color3_N_mtlxmix[mix]
+    NG_checkerboard_color3_N_mtlxdotproduct[dotproduct] --".in1"--> NG_checkerboard_color3_N_modulo[modulo]
+    NG_checkerboard_color3_N_mtlxfloor[floor] --".in1"--> NG_checkerboard_color3_N_mtlxdotproduct[dotproduct]
+    NG_checkerboard_color3_N_mtlxsubtract[subtract] --".in"--> NG_checkerboard_color3_N_mtlxfloor[floor]
+    NG_checkerboard_color3_uvoffsetINT([uvoffset]) ==.in2==> NG_checkerboard_color3_N_mtlxsubtract[subtract]
+    style NG_checkerboard_color3_uvoffsetINT fill:#0CF, color:#111
+    NG_checkerboard_color3_N_mtlxmult[multiply] --".in1"--> NG_checkerboard_color3_N_mtlxsubtract[subtract]
+    NG_checkerboard_color3_texcoordINT([texcoord]) ==.in1==> NG_checkerboard_color3_N_mtlxmult[multiply]
+    style NG_checkerboard_color3_texcoordINT fill:#0CF, color:#111
+    NG_checkerboard_color3_uvtilingINT([uvtiling]) ==.in2==> NG_checkerboard_color3_N_mtlxmult[multiply]
+    style NG_checkerboard_color3_uvtilingINT fill:#0CF, color:#111
+</div></code></pre>
+<p>One or more of these graphs may be stored in a glTF document with one or more of the outputs from these graphs connected to downstream glTF PBR materials. Geometric streams and textures may be bound to interface inputs on node graphs. Interface inputs may also have animation bound as applicable.</p>
+<p>Figure: An example of the JSON structure is shown below. From right to left is: A procedural graph with two inputs and one output; a list of procedurals graphs containing two graphs; a reference to a given procedural graph from a material.<br>
+<img src="composition.png" width=100%></p>
+<h2 id="standardization--interoperability">Standardization / Interoperability</h2>
+<table>
+<tr>
+<td><img src="image.png" width=100%>
+<td><img src="image-1.png" width=100%>
+</tr>
+</table>
+<p>A second extension (<a href="https://github.com/KhronosGroup/glTF/tree/KHR_texture_procedurals/extensions/2.0/Vendor/EXT_texture_procedurals_mx_1_39">EXT_texture_procedurals_mx_1_39</a>) specifies that node definitions (schema) are defined by MaterialX with the target<br>
+release being 1.39.</p>
+<p>A <a href="https://github.com/KhronosGroup/glTF-MaterialX-Converter">new tooling repository</a> allows for the bi-directional conversion of procedural graphs (and their associated material bindings)<br>
+between MaterialX XML and glTF JSON.</p>
+<p>The supported configurations include:</p>
+<ol>
+<li>Graph nodes which are defined by the &quot;standard library&quot; for the target MaterialX release. This includes<br>
+nodes defining basic math,</li>
+<li>glTF PBR and unlit shader nodes as defined in MaterialX and glTF.</li>
+</ol>
+<p>This allows for lossless interchange to and from MaterialX and hence the possibility for lossless interchange of graphs between glTF and OpenUSD, or other integrations which use MaterialX as the interchange format for materials.</p>
+<p>The logic is provided as a Python library which can packaged and integrated as desired.</p>
+<p>A series of sample content has been provided as part of a test suite with reference renderings provided. Below are a few samples.</p>
+<table>
+<tr>
+<th>Properties
+<th>glTF Procedural Graph
+<th>Reference Render
+<tr>
+<td>This graph contains nodes to produce a checkerboard pattern.
+<img src="graph2.svg" width=80%>
+<td><img src="graph2_gltf.svg" width=100%>
+<td><img src="image-4.png" width=100%>
+<tr>
+<td>This graph contains a reference to a file texture used to map to base color. This graph is a simplified version of the glTF BoomBox sample which ships with the MaterialX distribution.
+<img src="graph1.svg" width=80%>
+<td><img src="graph1_gltf.svg" width=100%>
+<td><img src="image-3.png" width=100%>
+</table>
+<hr>
+</body>
+</html>

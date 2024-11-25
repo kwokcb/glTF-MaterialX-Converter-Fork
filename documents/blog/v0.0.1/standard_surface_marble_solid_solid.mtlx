@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<materialx version="1.39" colorspace="lin_rec709">
+  <nodegraph name="NG_baked" colorspace="srgb_texture">
+    <image name="base_color" type="color3">
+      <input name="file" type="filename" value="D:\Work\materialx\bernard_MaterialX_3\resources\Materials\Examples\StandardSurface\Marble_3D_standard_surface_base_color.png" />
+    </image>
+    <output name="base_color_output" type="color3" nodename="base_color" />
+    <image name="subsurface_color" type="color3">
+      <input name="file" type="filename" value="D:\Work\materialx\bernard_MaterialX_3\resources\Materials\Examples\StandardSurface\Marble_3D_standard_surface_base_color.png" />
+    </image>
+    <output name="subsurface_color_output" type="color3" nodename="subsurface_color" />
+  </nodegraph>
+  <standard_surface name="SR_marble1" type="surfaceshader">
+    <input name="base" type="float" value="1" />
+    <input name="base_color" type="color3" output="base_color_output" nodegraph="NG_baked" />
+    <input name="specular_roughness" type="float" value="0.1" />
+    <input name="subsurface" type="float" value="0.4" />
+    <input name="subsurface_color" type="color3" output="subsurface_color_output" nodegraph="NG_baked" />
+  </standard_surface>
+  <surfacematerial name="Marble_3D" type="material">
+    <input name="surfaceshader" type="surfaceshader" nodename="SR_marble1" />
+  </surfacematerial>
+</materialx>
