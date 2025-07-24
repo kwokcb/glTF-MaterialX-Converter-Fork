@@ -20,11 +20,9 @@ def main():
     markdown_content = markdown_content.replace('```', '</div></code></pre>\n')
 
     md = MarkdownIt()
-    html = md.render(markdown_content)
-
-    # Create a complete HTML page template with Bootstrap 5.3.2
+    html = md.render(markdown_content)    # Create a complete HTML page template with Bootstrap 5.3.2
     html_template = f"""<!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-bs-theme="auto">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -33,11 +31,7 @@ def main():
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <!-- Custom styles -->
     <style>
-        body {{
-            background-color: #f8f9fa;
-        }}
         .container {{
-            background-color: white;
             border-radius: 8px;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             margin-top: 2rem;
@@ -45,19 +39,16 @@ def main():
             padding: 3rem;
         }}
         .toc {{
-            background-color: #f8f9fa;
             border-left: 4px solid #007bff;
             padding: 1rem;
             margin-bottom: 2rem;
         }}
         code {{
-            background-color: #f1f3f4;
             padding: 0.2rem 0.4rem;
             border-radius: 3px;
             font-size: 0.9em;
         }}
         pre {{
-            background-color: #f8f9fa;
             border: 1px solid #e9ecef;
             border-radius: 5px;
             padding: 1rem;
@@ -79,11 +70,17 @@ def main():
         table {{
             margin: 1rem 0;
         }}
-    </style>
+    </style>    
     <!-- Mermaid.js CDN -->
     <script type="module">
       import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10.9.0/dist/mermaid.esm.min.mjs';
       mermaid.initialize({{ startOnLoad: true }});
+    </script>
+    <!-- Simple dark mode detection -->
+    <script>
+      if (window.matchMedia('(prefers-color-scheme: dark)').matches) {{
+        document.documentElement.setAttribute('data-bs-theme', 'dark');
+      }}
     </script>
 </head>
 <body>
